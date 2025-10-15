@@ -18,7 +18,7 @@ version :: Version
 version = Version [0,1,0,0] []
 
 synopsis :: String
-synopsis = "Simple JSON library"
+synopsis = "Biblioteca JSON em Haskell"
 copyright :: String
 copyright = ""
 homepage :: String

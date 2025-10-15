@@ -1,10 +1,20 @@
 module Main where
 
 import SimpleJSON
+import PrettyJSON
+import ToJSON
 
 main :: IO ()
 main = do
-    putStrLn "=== Testando biblioteca JSON ==="
+ 
+    putStrLn "BIBLIOTECA JSON - AQUI ESTÃO OS TESTES "
+    
+    
+ 
+    putStrLn "PARTE 1: TESTES BASICOS  DE ACORDO PROF"
+   
+    
+    putStrLn " Testando tipos basicos JSON "
     putStrLn ""
     
     putStrLn "Teste 1 - String:"
@@ -71,7 +81,7 @@ main = do
     putJValue t10
     putStrLn ""
     
-    putStrLn "=== Testando funcoes de acesso ==="
+    putStrLn " Testando funcoes de acesso "
     putStrLn ""
     
     let obj = JObject [("teste", JString "valor")]
@@ -108,36 +118,102 @@ main = do
     putStrLn $ "JNull e null? " ++ show (isNull JNull)
     putStrLn $ "JString e null? " ++ show (isNull (JString "abc"))
     putStrLn $ "JNumber e null? " ++ show (isNull (JNumber 10))
-```
-
-## projeto-json.cabal
-```
-cabal-version: 2.2
-name: projeto-json
-version: 0.1.0.0
-synopsis: Biblioteca JSON em Haskell
-description: Trabalho de programacao funcional - manipulacao de JSON usando ADT
-license: BSD-3-Clause
-author: Aluno1, Aluno2, Aluno3
-maintainer: grupo@email.com
-category: Data
-build-type: Simple
-
-library
-  exposed-modules:
-      SimpleJSON
-  hs-source-dirs:
-      src
-  build-depends:
-      base >=4.7 && <5
-  default-language: Haskell2010
-
-executable projeto-json-exe
-  main-is: Main.hs
-  hs-source-dirs:
-      app
-  ghc-options: -threaded -rtsopts -with-rtsopts=-N
-  build-depends:
-      base >=4.7 && <5
-    , projeto-json
-  default-language: Haskell2010
+    putStrLn ""
+    
+    
+    putStrLn "PARTE 2: EXTRA 1 - PRETTY PRINTING"
+   
+    
+    putStrLn "Exemplo 1 - Objeto simples formatado:"
+    let obj1 = JObject [("nome", JString "joao"), ("idade", JNumber 25)]
+    putPretty obj1
+    putStrLn ""
+    
+    putStrLn "Exemplo 2 - Objeto complexo aninhado:"
+    let obj2 = JObject
+            [ ("aluno", JString "maria")
+            , ("curso", JString "computacao")
+            , ("notas", JArray [JNumber 8.5, JNumber 9.0, JNumber 7.5])
+            , ("aprovado", JBool True)
+            , ("observacoes", JNull)
+            ]
+    putPretty obj2
+    putStrLn ""
+    
+    putStrLn "Exemplo 3 - Array de objetos:"
+    let obj3 = JArray
+            [ JObject [("x", JNumber 10), ("y", JNumber 20)]
+            , JObject [("x", JNumber 30), ("y", JNumber 40)]
+            , JObject [("x", JNumber 50), ("y", JNumber 60)]
+            ]
+    putPretty obj3
+    putStrLn ""
+    
+   
+    putStrLn "PARTE 3: EXTRA 2 - CONVERSAO DE TIPOS"
+    
+    
+    putStrLn "Exemplo 1 - Convertendo Int:"
+    let num1 = fromInt 42
+    putJValue num1
+    putStrLn ""
+    
+    putStrLn "Exemplo 2 - Convertendo Double:"
+    let num2 = fromDouble 3.14159
+    putJValue num2
+    putStrLn ""
+    
+    putStrLn "Exemplo 3 - Convertendo String:"
+    let str1 = fromStr "ola haskell"
+    putJValue str1
+    putStrLn ""
+    
+    putStrLn "Exemplo 4 - Convertendo Bool:"
+    let bool1 = fromBool False
+    putJValue bool1
+    putStrLn ""
+    
+    putStrLn "Exemplo 5 - Convertendo lista de Int:"
+    let lista1 = fromList ([1, 2, 3, 4, 5] :: [Int])
+    putJValue lista1
+    putStrLn ""
+    
+    putStrLn "Exemplo 6 - Lista de strings:"
+    let lista2 = JArray [fromStr "haskell", fromStr "python", fromStr "java"]
+    putJValue lista2
+    putStrLn ""
+    
+    putStrLn "Exemplo 7 - Convertendo Maybe (Just):"
+    let maybe1 = fromMaybe (Just (100 :: Int))
+    putJValue maybe1
+    putStrLn ""
+    
+    putStrLn "Exemplo 8 - Convertendo Maybe (Nothing):"
+    let maybe2 = fromMaybe (Nothing :: Maybe Int)
+    putJValue maybe2
+    putStrLn ""
+    
+    putStrLn "Exemplo 9 - Lista aninhada:"
+    let lista3 = toJSON ([[1,2], [3,4], [5,6]] :: [[Int]])
+    putJValue lista3
+    putStrLn ""
+    
+    putStrLn "Exemplo 10 - Objeto completo usando conversoes:"
+    let obj4 = JObject
+            [ ("idade", toJSON (25 :: Int))
+            , ("altura", toJSON (1.75 :: Double))
+            , ("nome", fromStr "carlos")
+            , ("ativo", toJSON True)
+            , ("apelido", JNull)
+            , ("hobbies", JArray [fromStr "futebol", fromStr "musica", fromStr "games"])
+            ]
+    putStrLn "Versao compacta:"
+    putJValue obj4
+    putStrLn ""
+    putStrLn "Versao formatada (pretty print):"
+    putPretty obj4
+    putStrLn ""
+    
+   
+    putStrLn "TODOS OS TESTES CONCLUIDOS COM SUCESSO!"
+   

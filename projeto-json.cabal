@@ -1,17 +1,31 @@
--- This file should only contain Cabal package metadata.
--- Move your Haskell source code to a file like src/SimpleJSON.hs or SimpleJSON.hs,
--- and keep only the package description here.
-
--- Example .cabal file content:
-name:                projeto-json
-version:             0.1.0.0
-synopsis:            Simple JSON library
-category:            Data
-build-type:          Simple
-cabal-version:       >=1.10
+cabal-version: 2.2
+name: projeto-json
+version: 0.1.0.0
+synopsis: Biblioteca JSON em Haskell
+description: Trabalho de programacao funcional - manipulacao de JSON usando ADT
+license: BSD-3-Clause
+author: Aluno1, Aluno2, Aluno3
+maintainer: grupo@email.com
+category: Data
+build-type: Simple
 
 library
-  exposed-modules:     SimpleJSON
-  hs-source-dirs:      src
-  build-depends:       base >=4.7 && <5
-  default-language:    Haskell2010
+  exposed-modules:
+      SimpleJSON
+      PrettyJSON
+      ToJSON
+  hs-source-dirs:
+      src
+  build-depends:
+      base >=4.7 && <5
+  default-language: Haskell2010
+
+executable projeto-json-exe
+  main-is: Main.hs
+  hs-source-dirs:
+      app
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.7 && <5
+    , projeto-json
+  default-language: Haskell2010
