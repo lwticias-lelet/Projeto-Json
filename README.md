@@ -4,7 +4,10 @@ Biblioteca pra trabalhar com JSON usando Haskell e tipos de dados algebricos.
 
 ## FEITO POR
 LETICIA DELFINO DE ARAUJO - 2021061763
+
 CARLOS DANIEL DOS SANTOS SILVA - 2023098593
+
+DANIEL LINDOSO PENHA -2020033639
 
 ## Link do Repositorio
 
@@ -140,5 +143,6 @@ O arquivo Main.hs tem 10 testes diferentes:
 coloquei também duas funções extras,pretty priting e conversão de tipos
 
 E tambem testa todas as funcoes de acesso (getString, getNumber, etc).
+
 
 
